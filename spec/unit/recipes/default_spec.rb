@@ -20,13 +20,21 @@ describe 'nginx::default' do
 it 'Should install Nginx' do
   expect(chef_run).to install_package 'nginx'
 
-# it 'should enable the nginx service' do
-#   expect(chef_run).to enable_service 'nginx'
-# end
-
-# it 'should start the nginx service' do
-#   expect(chef_run).to start_service 'nginx'
-# end
-
 end
+
+it 'should enable the nginx service' do
+  expect(chef_run).to enable_service 'nginx'
+end
+
+it 'should start the nginx service' do
+  expect(chef_run).to start_service 'nginx'
+end
+
+it 'should create a proxy.conf template in /etc/nginx/sites-available' do
+    expect(chef_run).to create_template('/etc/nginx/sites-available/proxy.conf').with_variables(proxy_port: 3000)
+end
+it 'should delete the symlink from the default config in sites-enabled' do
+    expect(chef_run).to delete_link('/etc/nginx/sites-enabled/default')
+end
+
 end
