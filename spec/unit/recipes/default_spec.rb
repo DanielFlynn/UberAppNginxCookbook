@@ -18,5 +18,15 @@ describe 'nginx::default' do
   end
 
 it 'Should install Nginx' do
-  expect(chef_run).install_package 'nginx'
+  expect(chef_run).to install_package 'nginx'
+
+# it 'should enable the nginx service' do
+#   expect(chef_run).to enable_service 'nginx'
+# end
+
+# it 'should start the nginx service' do
+#   expect(chef_run).to start_service 'nginx'
+# end
+
+end
 end
